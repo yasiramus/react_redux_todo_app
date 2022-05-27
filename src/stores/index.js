@@ -9,8 +9,6 @@ const reducers = { todosReducer };
 const rootReducer = combineReducers(reducers);
 
 // setting the redux extention for the browser to see it
-const browExtension = window.__REDUX__DEVTOOLS__EXTENSION__ && window.__REDUX__DEVTOOLS__EXTENSION__();
-
-console.log(browExtension, 'browExtension');
+const browExtension = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 
 export const configStore = () => createStore(rootReducer, browExtension);
