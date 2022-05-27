@@ -1,0 +1,28 @@
+.TodoForm {
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    box-shadow: 0 4px 8px grey;
+    margin: 1.5rem 25rem;
+}
+
+.TodoFormInput {
+    font-size: 16px;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    border-bottom: 2px solid #ddd;
+    outline: none;
+    width: 50%;
+    margin: 0 10px;
+}
+
+#btn{
+    font-size:14px;
+    padding:6px 10px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    background-color:#22ee22;
+    color:#000;
+}
