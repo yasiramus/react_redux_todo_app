@@ -1,3 +1,4 @@
+// this is the store file 
 // impotation of legacy_createStore, combinedReducers
 import { legacy_createStore as createStore, combineReducers } from "redux"; 
 

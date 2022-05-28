@@ -1,3 +1,8 @@
+// importation of the createTodo function from the actions folder 
+import { deleteTodo } from "../stores/actions";
+
+import { connect } from "react-redux";
+
 // importation of styled components 
 import styled, { css } from "styled-components";
 
@@ -50,19 +55,21 @@ const Button = styled.button`
 `;
 // styling ends here
 
-export const ListItem = ({ task }) => {
+ const ListItem = ({ task, todoDeleted, deletions }) => {
 
     return (
 
         <ListItemWrapper>
 
+        {/* // the text here is coming from the todosReducer function in the reducer folder and
+            // from the newTodo object  */}
             <h3>{ task.text }</h3>
 
             <ListItemButton >
                 
                 <Button completed >Change to completed</Button>
 
-                <Button delete >Delete</Button>
+                <Button delete onClick={()=> deletions(task.text)} >Delete</Button>
 
             </ListItemButton>
 
@@ -70,3 +77,15 @@ export const ListItem = ({ task }) => {
         
     );
 }
+
+const mapStateToProps = state => ({
+    todoDeleted: state.todosReducer
+});
+
+const mapDispatchToProps = dispatch => ({
+
+    deletions: textt => dispatch(deleteTodo(textt))
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListItem);

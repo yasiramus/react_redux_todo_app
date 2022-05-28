@@ -3,7 +3,7 @@ import TodoForm from "./TodoForm";
 
 import { connect } from "react-redux";
 // importation of the ListItem 
-import { ListItem } from "./ListItem";
+import ListItem from "./ListItem";
 
 const TodoList = ({ todoss = [] }) => {
 
