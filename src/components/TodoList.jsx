@@ -1,7 +1,11 @@
+// this is the parent component
+
 // importation of the TodoForm 
 import TodoForm from "./TodoForm";
 
+// importation of the connct fxn 
 import { connect } from "react-redux";
+
 // importation of the ListItem 
 import ListItem from "./ListItem";
 
@@ -13,7 +17,7 @@ const TodoList = ({ todoss = [] }) => {
             
             <TodoForm />
 
-            {todoss.map((todo,indexKeys) => <ListItem task = {todo} key={ indexKeys }/> ) }   
+            { todoss.map((todo, indexKeys) => <ListItem task={todo} key={indexKeys} customIndex={indexKeys}/> ) }   
             
         </div>        
 

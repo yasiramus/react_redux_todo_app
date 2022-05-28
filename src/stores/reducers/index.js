@@ -1,7 +1,8 @@
-// importation of the create todo type 
 // you import it in the formart when the file name is index.js
+// importation of the create todo type 
 import { CREATE_TODO } from "../actions";
 
+// importation of delete todo type
 import { DELETE_TODO } from "../actions";
 
 // state cotains the over all store
@@ -11,11 +12,13 @@ export const todosReducer = (state = [], action) => {
     
     switch (action.type) {
 
+    // useing the CREATE_TODO type here 
         case CREATE_TODO: {
 
-            console.log(action.payload ,'hh')
             const newTodo = {
+
                 text: action.payload.texts,
+
                 // isCompleted: action.payload.isCompleted,
 
                 isCompleted: false
@@ -25,27 +28,13 @@ export const todosReducer = (state = [], action) => {
             return [...state, newTodo];
         };
             
-        case DELETE_TODO: {
+        // useing the DELETE_TODO type here 
+        case DELETE_TODO: 
 
-            // return Object.assign({}, state, {
-            //    text: state.filter((todo) => {
-            //         return todo.index !== action.index
-            //     })
-                    
-            // })
-                
-                    
-            const deleteTodos = {
-
-                text:state.filter(todoo => todoo.index !== action)
-
-            }
-            console.log(deleteTodos,  'dt');
-            return deleteTodos
-            
-        }    
+            return state.filter((todoIn, indexx) => indexx !== action.payload.index);   
             
         default:
+
             return state;
         
     }

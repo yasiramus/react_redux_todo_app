@@ -1,6 +1,7 @@
 // importation of the createTodo function from the actions folder 
 import { deleteTodo } from "../stores/actions";
 
+// importation of the connect fxn 
 import { connect } from "react-redux";
 
 // importation of styled components 
@@ -55,7 +56,8 @@ const Button = styled.button`
 `;
 // styling ends here
 
- const ListItem = ({ task, todoDeleted, deletions }) => {
+// passing the customIndex from the parent component which is the TodoList as a prop
+ const ListItem = ({ task, deletions, customIndex }) => {
 
     return (
 
@@ -69,7 +71,7 @@ const Button = styled.button`
                 
                 <Button completed >Change to completed</Button>
 
-                <Button delete onClick={()=> deletions(task.text)} >Delete</Button>
+                <Button delete onClick={()=> deletions(customIndex)} >Delete</Button>
 
             </ListItemButton>
 
@@ -78,14 +80,11 @@ const Button = styled.button`
     );
 }
 
-const mapStateToProps = state => ({
-    todoDeleted: state.todosReducer
-});
-
+// dispatching the deleteTodo type 
 const mapDispatchToProps = dispatch => ({
 
     deletions: textt => dispatch(deleteTodo(textt))
-})
 
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListItem);
+export default connect(null, mapDispatchToProps)(ListItem);
