@@ -1,9 +1,25 @@
+/* TodoList styling startfrom here  */
+.TextH3{
+    margin : 0 25rem;
+    padding: 15px 0;
+    text-align: center;
+    font-size: 25px;
+    /* box-shadow: inset 4px 0 8px grey; */
+}
+/* TodoList styling ends here 
+ */
+/* .TodoForm styling start from here  */
+.LabelText{
+    margin-right: 10px;
+    font-weight: bold;
+}
+
 .TodoForm {
     border-radius: 8px;
     padding: 16px;
     text-align: center;
     box-shadow: 0 4px 8px grey;
-    margin: 1.5rem 25rem;
+    margin: 1rem  25rem 1.5rem;
 }
 
 .TodoFormInput {
@@ -23,6 +39,8 @@
     border:none;
     border-radius:8px;
     cursor:pointer;
-    background-color:#22ee22;
-    color:#000;
+    background-color:#af066e;
+    color:#fff;
 }
+
+/* .TodoForm styling ends here  */

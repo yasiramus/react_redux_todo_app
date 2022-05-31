@@ -1,5 +1,5 @@
-// importation of the createTodo function from the actions folder 
-import { deleteTodo } from "../stores/actions";
+// importation of the createTodo function from the actions folder which is the actions creators
+import { deleteTodo, completeTodo } from "../stores/actions";
 
 // importation of the connect fxn 
 import { connect } from "react-redux";
@@ -14,13 +14,20 @@ const ListItemWrapper = styled.div`
     position:relative;
     display:flex;
     justify-content:space-between;
-    align-item :center;
+    align-items :center;
     border-radius:8px;
     box-shadow:0 4px 8px grey;
     margin:0 25rem;
-    padding :6px 8px;
+    padding :6px 15px;
     
     `;
+
+// styled components CSS for h3 text
+const TextH3 = styled.h3`
+    font-weight: 500;
+    font-size:16px;
+
+`;
 
 // styled components CSS for button div
 const ListItemButton = styled.div`
@@ -42,14 +49,15 @@ const Button = styled.button`
     height:40px;
 
     ${props => props.completed && css`
-        background-color:#22ee22;
-        color:#000;
+        background-color:#af066e;
+        color:#fff;
         `
     };
 
     ${props => props.delete && css`
         background-color:red;
-        color:#fff;
+        color:#000;
+        font-weight:bold;
         `
     };
 
@@ -57,33 +65,53 @@ const Button = styled.button`
 // styling ends here
 
 // passing the customIndex from the parent component which is the TodoList as a prop
- const ListItem = ({ task, deletions, customIndex }) => {
+const ListItem = ({ task, deletions, customIndex, complete }) => {
 
     return (
 
         <ListItemWrapper>
 
-        {/* // the text here is coming from the todosReducer function in the reducer folder and
+            {/* // the text here is coming from the todosReducer function in the reducer folder and
             // from the newTodo object  */}
-            <h3>{ task.text }</h3>
+            <TextH3>{task.text}</TextH3>
 
             <ListItemButton >
-                
-                <Button completed >Change to completed</Button>
 
-                <Button delete onClick={()=> deletions(customIndex)} >Delete</Button>
+                {/* using the ternary operator to render a conditonal state based on the boolean value */}
+                {
+                    // isCompleted is the keyword used at the redudcer for completetodod case 
+                    task.isCompleted ?
+                    
+                        // if isCompleted is true 
+                        (<Button completed onClick={() => complete(customIndex)}>Done</Button>) :
+
+                        // if isCompleted is false 
+                        (<Button completed onClick={() => complete(customIndex)}>Pending</Button>)
+                    
+                    // updating based on the text
+                        // (<Button completed onClick={() => complete(task.text)}>Pending</Button>)
+
+                }    
+                
+            
+                {/* delete btn  */}
+                <Button delete onClick={() => deletions(customIndex)} >Delete</Button>
 
             </ListItemButton>
 
         </ListItemWrapper>
         
     );
-}
+};
 
-// dispatching the deleteTodo type 
+// dispacting actions creators 
 const mapDispatchToProps = dispatch => ({
 
-    deletions: textt => dispatch(deleteTodo(textt))
+    // for deletions 
+    deletions: textt => dispatch(deleteTodo(textt)),
+
+    //   for completions   
+    complete: (status) => dispatch(completeTodo(status))
 
 });
 

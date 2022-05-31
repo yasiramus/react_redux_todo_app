@@ -9,12 +9,16 @@ import { connect } from "react-redux";
 // importation of the ListItem 
 import ListItem from "./ListItem";
 
+import TodoListStyle from "../ModuleCss/TodoForm.module.css";
+
 const TodoList = ({ todoss = [] }) => {
 
     return (
 
-        <div className = "TodoListWrapper">
+        <div>
             
+            <h2 className={TodoListStyle.TextH3}>What in for today?</h2>
+
             <TodoForm />
 
             { todoss.map((todo, indexKeys) => <ListItem task={todo} key={indexKeys} customIndex={indexKeys}/> ) }   

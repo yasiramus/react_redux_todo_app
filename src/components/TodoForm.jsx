@@ -10,16 +10,18 @@ import { connect } from "react-redux";
 // importation of useState from react 
 import { useState } from "react";
 
-  const TodoForm = ({ allTodo, addTodo }) => {
+  const TodoForm = ({  addTodo }) => {
 
     //   setting of state 
       const [ inputVal, setInputValues ] = useState(""); 
      
-    console.log(allTodo,'formtodos');
+    // console.log(...allTodo,'alltodo');
      
     return ( 
 
-        <div className = { TodoFormStyle.TodoForm }>
+        <div className={TodoFormStyle.TodoForm}>
+            
+            <label className={TodoFormStyle.LabelText}>New Task</label>
 
             <input type = "text" className = { TodoFormStyle.TodoFormInput }
                 
@@ -45,12 +47,12 @@ import { useState } from "react";
 }
 
 // setting of the state 
-const mapStateToProps = state => ({
+// const mapStateToProps = state => ({
 
-    // the todosReducer is refernce the todosReducer function in the reducer folder 
-    allTodo: state.todosReducer
+//     // the todosReducer is refernce the todosReducer function in the reducer folder 
+//     allTodo: state.todosReducer
 
-});
+// });
 
 // setting of the dispatch 
 const mapDispatchToProps = dispatch => ({
@@ -61,4 +63,4 @@ const mapDispatchToProps = dispatch => ({
     
 });
 
-export default connect( mapStateToProps, mapDispatchToProps )(TodoForm);
+export default connect( null, mapDispatchToProps )(TodoForm);
