@@ -1,6 +1,7 @@
 // importation of the createTodo function from the actions folder which is the actions creators
 import { deleteTodo, completeTodo } from "../stores/actions";
 
+import { thunkTesting, fetchTodos } from "../stores/thunk";
 // importation of the connect fxn 
 import { connect } from "react-redux";
 
@@ -65,7 +66,7 @@ const Button = styled.button`
 // styling ends here
 
 // passing the customIndex from the parent component which is the TodoList as a prop
-const ListItem = ({ task, deletions, customIndex, complete }) => {
+const ListItem = ({ task, deletions, customIndex, complete, getUser }) => {
 
     return (
 
@@ -97,6 +98,9 @@ const ListItem = ({ task, deletions, customIndex, complete }) => {
                 {/* delete btn  */}
                 <Button delete onClick={() => deletions(customIndex)} >Delete</Button>
 
+                <Button delete onClick={() => getUser(task.text)} >GetUsers</Button>
+
+
             </ListItemButton>
 
         </ListItemWrapper>
@@ -111,7 +115,10 @@ const mapDispatchToProps = dispatch => ({
     deletions: textt => dispatch(deleteTodo(textt)),
 
     //   for completions   
-    complete: (status) => dispatch(completeTodo(status))
+    complete: (status) => dispatch(completeTodo(status)),
+
+    getUser: (testB) => dispatch(fetchTodos(testB))
+
 
 });
 

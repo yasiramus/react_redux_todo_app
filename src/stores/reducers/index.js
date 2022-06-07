@@ -1,6 +1,6 @@
 // you import it in the formart when the file name is index.js
 // importation of the create todo type 
-import { CREATE_TODO, DELETE_TODO, COMPLETE_TODO } from "../actions";
+import { CREATE_TODO, DELETE_TODO, COMPLETE_TODO, FETCH_TODOS } from "../actions";
 
 // state cotains the over all store
 // action contains the type and payload
@@ -90,6 +90,12 @@ export const todosReducer = (state = [], action) => {
             return Data;
             
         };
+            
+        case FETCH_TODOS: {
+
+            console.log(action.payload, "fecthtodos");
+            return state;
+        } 
             
         default:
 

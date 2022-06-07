@@ -1,9 +1,3 @@
-// setting a general action type for add todo
-export const CREATE_TODO = "ADD_TODO"; 
-
-// delete todo type
-export const DELETE_TODO = "DELETE_TODO"; 
-
 export const COMPLETE_TODO = "COMPLETE_TODO";
 
 // add todo action which takes the type and payload 
@@ -17,6 +11,9 @@ export const createTodo = texts => ({
              
 });
 
+// delete todo type
+export const DELETE_TODO = "DELETE_TODO"; 
+
 // action creator 
 // delete todo action which takes the type and payload 
 export const deleteTodo = index => ({
@@ -27,6 +24,9 @@ export const deleteTodo = index => ({
 
 });
 
+// setting a general action type for add todo
+export const CREATE_TODO = "ADD_TODO"; 
+
 // action creator for completed btn 
 export const completeTodo = complete => ({
 
@@ -35,3 +35,12 @@ export const completeTodo = complete => ({
     payload: { complete }
 
 });
+
+export const FETCH_TODOS = "FETCH_TODOS";
+
+export const getTodos = (dummyData) => ({
+
+    type: FETCH_TODOS,
+    payload: { dummyData }
+    
+})
