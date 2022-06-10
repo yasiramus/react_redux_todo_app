@@ -1,17 +1,20 @@
 import axios from "axios";
 
-import { FETCH_TODOS } from "../actions";
+import { getTodos,createTodo, completeTodo } from "../actions";
 
 export const fetchTodos = () => 
 
-    async (dispatch, getState) => {
+    async (dispatch) => {
 
         try {
 
-            const Datas = await axios.get(`https://jsonplaceholder.typicode.com/users`);
-            console.log(Datas)
-            dispatch({ type: FETCH_TODOS, payload: Datas.data });
-            console.log("this is the state", getState());
+            const Datas = await axios.get(`http://localhost:8000/todo`);
+
+            // console.log(Datas.data,'get request thunk')
+
+            dispatch(getTodos(Datas.data));
+
+            // console.log("this is the state", getState());
 
         } catch (error) {
 
@@ -19,13 +22,45 @@ export const fetchTodos = () =>
 
         }
 
-    
-
 };
 
-export const thunkTesting = () => 
+export const addTodo = (text) => 
+
+    async (dispatch) => {
+
+        try {
+
+            const postData = await axios.post(`http://localhost:8000/todo`,{text});
+
+            const { data } = postData;
+            // console.log(data,'datathunk')
+            dispatch(createTodo(data));
+
+        } catch (error) {
+
+            console.log(error.response)
+
+        }
+
+    };
+
+
+export const updateTodo = (complete) => 
+
+    async (dispatch) => {
+
+        try {
+            
+            const todoUpdate = await axios.put(`http://localhost:8000/todo/${complete}`)
+            
+            const { data } = todoUpdate;
+            console.log(todoUpdate,'update todo')
+            dispatch(completeTodo(data))
+
+        } catch (error) {
+            
+            console.log(error.response,'thunk update error')
+        }
     
-    () => {
-        alert("this from the thunk middleware")
-    
-}
+}    
+

@@ -1,4 +1,5 @@
-export const COMPLETE_TODO = "COMPLETE_TODO";
+// setting a general action type for add todo
+export const CREATE_TODO = "ADD_TODO"; 
 
 // add todo action which takes the type and payload 
 export const createTodo = texts => ({
@@ -24,8 +25,8 @@ export const deleteTodo = index => ({
 
 });
 
-// setting a general action type for add todo
-export const CREATE_TODO = "ADD_TODO"; 
+// complete todo type 
+export const COMPLETE_TODO = "COMPLETE_TODO";
 
 // action creator for completed btn 
 export const completeTodo = complete => ({
@@ -38,9 +39,47 @@ export const completeTodo = complete => ({
 
 export const FETCH_TODOS = "FETCH_TODOS";
 
-export const getTodos = (dummyData) => ({
+export const getTodos = (todo) => ({
 
     type: FETCH_TODOS,
-    payload: { dummyData }
+    payload:{todo}
     
 })
+
+export const FETCH_TODOS_REQUEST = "FETCH_TODOS_REQUEST";
+export const FETCH_TODOS_SUCCESS = "FETCH_TODOS_SUCCESS";
+export const FETCH_TODOS_FAILURE = "FETCH_TODOS_FAILURE";
+
+
+// action creators
+
+export const fetchTodosRequest = () => {
+
+    return {
+
+        type: FETCH_TODOS_REQUEST
+
+    }
+}
+
+export const fetchTodosSuccess = (success) => {
+
+    return {
+
+        type: FETCH_TODOS_SUCCESS,
+
+        payload: success
+        
+    }
+}
+
+export const fetchTodosFailure = (success) => {
+
+    return {
+
+        type: FETCH_TODOS_FAILURE,
+
+        payload: success
+        
+    }
+}

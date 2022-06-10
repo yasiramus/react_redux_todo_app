@@ -1,8 +1,10 @@
 // importation of module css 
 import TodoFormStyle from "../ModuleCss/TodoForm.module.css";
 
-// importation of the createTodo function from the actions folder 
-import { createTodo } from "../stores/actions";
+// importation of the createTodo function from the actions folder
+// import { createTodo } from "../stores/actions";
+
+import { addTodo } from "../stores/thunk";
 
 // importation of connect from react-redux 
 import { connect } from "react-redux";
@@ -10,12 +12,12 @@ import { connect } from "react-redux";
 // importation of useState from react 
 import { useState } from "react";
 
-  const TodoForm = ({  addTodo }) => {
+  const TodoForm = ({ allTodo, addNewTodo}) => {
 
     //   setting of state 
       const [ inputVal, setInputValues ] = useState(""); 
      
-    // console.log(...allTodo,'alltodo');
+    // console.log(allTodo,'alltodo');
      
     return ( 
 
@@ -33,7 +35,7 @@ import { useState } from "react";
                     // disabling the add task button when the input field is empty 
                     if (!inputVal) return;
                     
-                    addTodo(inputVal)
+                    addNewTodo(inputVal)
 
                     // clear the input field 
                     setInputValues("")
@@ -47,20 +49,22 @@ import { useState } from "react";
 }
 
 // setting of the state 
-// const mapStateToProps = state => ({
+const mapStateToProps = state => ({
 
-//     // the todosReducer is refernce the todosReducer function in the reducer folder 
-//     allTodo: state.todosReducer
+    // the todosReducer is refernce the todosReducer function in the reducer folder 
+    allTodo: state.todosReducer
 
-// });
+});
 
 // setting of the dispatch 
 const mapDispatchToProps = dispatch => ({
 
     // the text here is coming from the todosReducer function in the reducer folder and
     // from the newTodo object 
-    addTodo: text => dispatch(createTodo(text))
+    // addTodo: text => dispatch(createTodo(text))
+    
+    addNewTodo : text => dispatch(addTodo(text))
     
 });
 
-export default connect( null, mapDispatchToProps )(TodoForm);
+export default connect( mapStateToProps, mapDispatchToProps )(TodoForm);

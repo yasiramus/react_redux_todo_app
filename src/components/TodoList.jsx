@@ -11,8 +11,18 @@ import ListItem from "./ListItem";
 
 import TodoListStyle from "../ModuleCss/TodoForm.module.css";
 
-const TodoList = ({ todoss = [] }) => {
+import { fetchTodos } from "../stores/thunk";
+import { useEffect } from "react";
 
+const TodoList = ( {todoss, getUser}) => {
+// const TodoList = ({ todoss = [] }) => {
+
+    useEffect(() => {
+
+        getUser()
+        
+    }, [getUser])
+    
     return (
 
         <div>
@@ -21,8 +31,10 @@ const TodoList = ({ todoss = [] }) => {
 
             <TodoForm />
 
-            { todoss.map((todo, indexKeys) => <ListItem task={todo} key={indexKeys} customIndex={indexKeys}/> ) }   
+            {/* { todoss.map((todo, indexKeys) => <ListItem task={todo} key={indexKeys} customIndex={indexKeys}/> ) }    */}
             
+            { todoss.map((val,index) =>( <ListItem task={val} key={index}/> ) ) }   
+
         </div>        
 
     );
@@ -35,4 +47,11 @@ const mapStateToProps = (state) => ({
 
 });
 
-export default connect(mapStateToProps)(TodoList);
+const mapDispatchToProps = dispatch => ({
+
+    getUser: () => dispatch(fetchTodos())
+
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps )(TodoList);

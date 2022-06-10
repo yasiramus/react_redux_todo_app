@@ -1,5 +1,5 @@
 // importation of the createTodo function from the actions folder which is the actions creators
-import { updateTodo } from "../stores/thunk";
+import { deleteTodo, completeTodo } from "../stores/actions";
 
 // importation of the connect fxn 
 import { connect } from "react-redux";
@@ -64,34 +64,41 @@ const Button = styled.button`
 `;
 // styling ends here
 
-const ListItem = ({ task, complete }) => {
-    
+// passing the customIndex from the parent component which is the TodoList as a prop
+const ListItem = ({ task, deletions, customIndex, complete }) => {
+console.log(task,'task')
+console.log(task.isCompleted,'taskId')
+
     return (
 
         <ListItemWrapper>
 
+            {/* // the text here is coming from the todosReducer function in the reducer folder and
+            // from the newTodo object  */}
 
-            <TextH3
-                
-                style={
-
-                    task.isCompleted === true ? {textDecoration:"line-through"} : {textDecoration:"none"}}
-            
-            > {task.text} </TextH3>
+            <TextH3>{task.id}</TextH3>
 
             <ListItemButton >
 
+                {/* using the ternary operator to render a conditonal state based on the boolean value */}
                 {
-                    task.isCompleted === true ?
+                    // isCompleted is the keyword used at the redudcer for completetodod case 
+                    task.isCompleted ?
                     
-                        (<Button completed onClick={() => complete(task.id)}>Done</Button>) :
+                        // if isCompleted is true 
+                        (<Button completed onClick={() => complete(customIndex)}>Done</Button>) :
 
-                        (<Button completed onClick={() => complete(task.id)}>Pending</Button>)
+                        // if isCompleted is false 
+                        (<Button completed onClick={() => complete(customIndex)}>Pending</Button>)
                     
+                    // updating based on the text
+                        // (<Button completed onClick={() => complete(task.text)}>Pending</Button>)
 
                 }    
+                
             
-                <Button delete >Delete</Button>
+                {/* delete btn  */}
+                <Button delete onClick={() => deletions(customIndex)} >Delete</Button>
 
             </ListItemButton>
 
@@ -100,11 +107,14 @@ const ListItem = ({ task, complete }) => {
     );
 };
 
+// dispacting actions creators 
 const mapDispatchToProps = dispatch => ({
 
-    // deletions: textt => dispatch(deleteTodo(textt)),
+    // for deletions 
+    deletions: textt => dispatch(deleteTodo(textt)),
 
-    complete: (status) => dispatch(updateTodo(status)),
+    //   for completions   
+    complete: (status) => dispatch(completeTodo(status)),
 
 });
 
